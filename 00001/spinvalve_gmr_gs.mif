@@ -1,0 +1,236 @@
+# MIF 2.1
+# Simulasi Giant Magnetoresistance (GMR)
+# Film tipis Permalloy (NiFe) diapit oleh CoFeB
+# (CoFeB/NiFe/CoFeB)
+# dengan medan luar statis pada skala mT.
+# 
+# Samarthya Lykamanuella
+# https://github.com/nanofisika
+# 
+# Dimodifikasi dari:
+# https://github.com/fangohr/oommf/blob/master/oommf/app/oxs/examples/spinvalve.mif
+# 
+# Sumber parameter NiFe:
+# https://doi.org/10.1088/1402-4896/adb6fe
+# 
+# Sumber parameter CoFeB:
+# https://doi.org/10.1016/j.cap.2021.04.017
+
+# Parameter besar medan (dalam mT).
+# Ubah menjadi "0" untuk simulasi keadaan dasar/ground state.
+set extField 0
+
+set pi [expr {4*atan(1.0)}]
+set mu0 [expr {4*$pi*1e-7}]
+
+Specify Oxs_BoxAtlas:top {
+   xrange {0 150e-9}
+   yrange {0 50e-9}
+   zrange {6e-9 9e-9}
+}
+
+Specify Oxs_MultiAtlas:atlas {
+   atlas :top
+   atlas { Oxs_BoxAtlas:spacer {
+       xrange {0 150e-9}
+       yrange {0 50e-9}
+       zrange {3e-9 6e-9}
+   }   }
+   atlas { Oxs_BoxAtlas:bottom {
+       xrange {0 150e-9}
+       yrange {0 50e-9}
+       zrange {0 3e-9}
+   }   }
+}
+
+Specify Oxs_RectangularMesh:mesh {
+  cellsize {5e-9 5e-9 3e-9}
+  atlas :atlas
+}
+
+Specify Oxs_Exchange6Ngbr {
+  atlas :atlas
+  A {
+    spacer spacer 1.3e-11
+    top top 1.3e-11
+    bottom bottom 1.3e-11
+  }
+}
+
+Specify Oxs_UniaxialAnisotropy {
+  K1 { Oxs_AtlasScalarField {
+    atlas :atlas
+    values {
+      top 3.86e5
+      spacer 0
+      bottom 3.86e5
+    }
+  }}
+  axis {1 0 0}
+}
+
+Specify Oxs_Demag {}
+
+# The external field
+Specify Oxs_ScriptUZeeman [subst {
+    multiplier [expr 0.001/$mu0]
+    script_args total_time
+    script StaticPulse
+}]
+
+# The field function
+proc StaticPulse { total_time } {
+    global extField
+    return [list $extField 0 0 0 0 0]
+}
+
+Specify Oxs_EulerEvolve:evolve {
+  alpha 0.5
+}
+
+# Select fields
+Specify Oxs_AtlasVectorField:TopX {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      top { 1 0 0 }
+   }
+}
+Specify Oxs_AtlasVectorField:TopY {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      top { 0 1 0 }
+   }
+}
+Specify Oxs_AtlasVectorField:TopZ {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      top { 0 0 1 }
+   }
+}
+Specify Oxs_AtlasVectorField:SpacerX {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      spacer { 1 0 0 }
+   }
+}
+Specify Oxs_AtlasVectorField:SpacerY {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      spacer { 0 1 0 }
+   }
+}
+Specify Oxs_AtlasVectorField:SpacerZ {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      spacer { 0 0 1 }
+   }
+}
+Specify Oxs_AtlasVectorField:BottomX {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      bottom { 1 0 0 }
+   }
+}
+Specify Oxs_AtlasVectorField:BottomY {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      bottom { 0 1 0 }
+   }
+}
+Specify Oxs_AtlasVectorField:BottomZ {
+   atlas :atlas
+   default_value {0 0 0}
+   values {
+      bottom { 0 0 1 }
+   }
+}
+
+
+Specify Oxs_TimeDriver {
+ basename spinvalve
+ evolver :evolve
+ comment {1 deg/ns = 17453293 rad/sec; If Ms=8.6e5, and lambda is small,
+         then mxh=1e-6 translates into dm/dt = 2e5 rad/sec = 0.01 deg/ns}
+ stopping_dm_dt 0.1
+ mesh :mesh
+ Ms  { Oxs_AtlasScalarField {
+     atlas :atlas
+     default_value 0
+     values {
+        top 9.57e5
+        spacer 8e5
+        bottom 9.57e5
+     }
+ }}
+ m0 { Oxs_AtlasVectorField {
+   atlas :atlas
+   values {
+     top {-5 1 0}
+     spacer {-1 0 0}
+     bottom {-5 -1 0}
+   }
+ }}
+
+ user_output {
+  name "ax"
+  source_field Spin
+  select_field TopX
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "ay"
+  source_field Spin
+  select_field TopY
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "az"
+  source_field Spin
+  select_field TopZ
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "bx"
+  source_field Spin
+  select_field SpacerX
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "by"
+  source_field Spin
+  select_field SpacerY
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "bz"
+  source_field Spin
+  select_field SpacerZ
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "cx"
+  source_field Spin
+  select_field BottomX
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "cy"
+  source_field Spin
+  select_field BottomY
+  exclude_0_Ms 1
+ }
+ user_output {
+  name "cz"
+  source_field Spin
+  select_field BottomZ
+  exclude_0_Ms 1
+ }
+}
