@@ -24,3 +24,7 @@ OOMMF membutuhkan Tcl/Tk untuk dapat dijalankan. Anda dapat mengunduhnya melalui
 
 Program OOMMF itu sendiri dapat diunduh melalui situs resmi sebagai berikut:
 - https://math.nist.gov/oommf/software-21.html
+
+_User guide_ (panduan pengguna) dari program OOMMF:
+- https://math.nist.gov/oommf/doc/userguide21a3/userguide
+- https://math.nist.gov/oommf/doc/userguide20a3/userguide.pdf
