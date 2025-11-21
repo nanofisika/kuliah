@@ -2,6 +2,8 @@
 
 > **"Apa Itu Mikromagnetika?"**
 > 
+> Seri 10 Menit Mikromagnetika
+> 
 > Samarthya Lykamanuella - nanofisika
 > 
 > Jumat, 21 November 2025
