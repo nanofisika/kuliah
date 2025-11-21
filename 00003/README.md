@@ -1,18 +1,21 @@
 # 00003
 
-**"Apa Itu Mikromagnetika?"**
-Samarthya Lykamanuella - nanofisika
-Jumat, 21 November 2025
-https://youtu.be/azHNbqh0J84
+> **"Apa Itu Mikromagnetika?"**
+> 
+> Samarthya Lykamanuella - nanofisika
+> 
+> Jumat, 21 November 2025
+> 
+> https://youtu.be/azHNbqh0J84
 
 ## Unduhan Salindia (PPT)
 
-**Salindia ini berlisensi CC BY-NC-SA 4.0**
-(Attribution-NonCommercial-ShareAlike 4.0 International )
-Kunjungi https://creativecommons.org/licenses/by-nc-sa/4.0 untuk informasi lebih lanjut.
+![](https://github.com/nanofisika/kuliah/blob/main/assets/by-nc-sa.png?raw=true)
 
-**Unduhan Salindia**
-https://drive.google.com/drive/folders/1FaQzBdK7lyE9ANJo_bJmoJF64Q2d6-5g
+**Salindia ini berlisensi [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0) (Attribution-NonCommercial-ShareAlike 4.0 International)**
+
+> **Unduh di sini:**
+> https://drive.google.com/drive/folders/1FaQzBdK7lyE9ANJo_bJmoJF64Q2d6-5g
 
 ## Referensi Eksternal
 
