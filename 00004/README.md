@@ -6,7 +6,7 @@
 > 
 > Samarthya Lykamanuella - nanofisika
 > 
-> Jumat, 21 November 2025
+> Sabtu, 22 November 2025
 > 
 > https://youtu.be/xDHOHwA_6M4
 
