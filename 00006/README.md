@@ -30,3 +30,5 @@ Untuk memuat file konfigurasi agar sama persis sesuai tampilan pada mmDisp, eksp
 ```
 tclsh "C:\oommf\oommf.tcl" avf2ppm -ipat *.omf -format PNG -config "C:\oommf\config.config"
 ```
+
+Contoh file konfigurasi avf2ppm tersedia dalam folder repositori GitHub ini.
