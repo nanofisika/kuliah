@@ -13,8 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
-
 # Obtaining the OMF file of OOMMF simulations at a specific DataTable coordinate.
+# This file is downloaded from https://github.com/nanofisika/kuliah/blob/main/00008.
 # Created by Samarthya Lykamanuella (youtube.com/@nanofisika) on 2025-12-09.
 # Visit my GitHub page on https://github.com/samarlyka ^^.
 
