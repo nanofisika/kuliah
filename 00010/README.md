@@ -1,4 +1,4 @@
-# 00009
+# 00010
 
 > **"Dasar-Dasar iPython Notebook Menggunakan Google Colab"**
 > 
